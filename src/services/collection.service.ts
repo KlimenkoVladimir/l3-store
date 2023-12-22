@@ -1,30 +1,13 @@
-// import { CollectionService } from './collection.service';
-
-// class CartService extends CollectionService {
-//   constructor() {
-//     super('__wb-cart');
-//   }
-
-//   init() {
-//     this._updCounters();
-//   }
-
-//   private async _updCounters() {
-//     const products = await this.get();
-//     const count = products.length >= 10 ? '9+' : products.length;
-
-//     //@ts-ignore
-//     document.querySelectorAll('.js__cart-counter').forEach(($el: HTMLElement) => ($el.innerText = String(count || '')));
-//   }
-// }
-
-// export const cartService = new CartService();
 import localforage from 'localforage';
 import { ProductData } from 'types';
 
-const DB = '__wb-cart';
+export class CollectionService {
+  DB: string;
 
-class CartService {
+  constructor(dbName: string) {
+    this.DB = dbName;
+  }
+
   init() {
     this._updCounters();
   }
@@ -40,16 +23,16 @@ class CartService {
   }
 
   async clear() {
-    await localforage.removeItem(DB);
+    await localforage.removeItem(this.DB);
     this._updCounters();
   }
 
   async get(): Promise<ProductData[]> {
-    return (await localforage.getItem(DB)) || [];
+    return (await localforage.getItem(this.DB)) || [];
   }
 
   async set(data: ProductData[]) {
-    await localforage.setItem(DB, data);
+    await localforage.setItem(this.DB, data);
     this._updCounters();
   }
 
@@ -66,5 +49,3 @@ class CartService {
     document.querySelectorAll('.js__cart-counter').forEach(($el: HTMLElement) => ($el.innerText = String(count || '')));
   }
 }
-
-export const cartService = new CartService();
