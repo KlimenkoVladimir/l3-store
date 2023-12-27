@@ -4,12 +4,14 @@ import html from './checkout.tpl.html';
 import { formatPrice } from '../../utils/helpers';
 import { cartService } from '../../services/cart.service';
 import { ProductData } from 'types';
+import { statService } from '../../services/statistic.service';
 
 class Checkout extends Component {
   products!: ProductData[];
 
   async render() {
     this.products = await cartService.get();
+    console.log(this.products);
 
     if (this.products.length < 1) {
       this.view.root.classList.add('is__empty');
@@ -29,8 +31,9 @@ class Checkout extends Component {
   }
 
   private async _makeOrder() {
+    await statService.sendPurchase(this.products);
     await cartService.clear();
-    fetch('/api/makeOrder', {
+    await fetch('/api/makeOrder', {
       method: 'POST',
       body: JSON.stringify(this.products)
     });
