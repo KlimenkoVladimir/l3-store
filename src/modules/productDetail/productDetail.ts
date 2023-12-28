@@ -75,7 +75,8 @@ class ProductDetail extends Component {
   }
 
   private _setInFav() {
-    this.view.btnFav.innerText = '✓ В избранном';
+    this.view.btnFav.innerHTML = `<svg class="svg-icon"><use xlink:href="#heart-fill"></use></svg>`;
+
     this.view.btnFav.disabled = true;
   }
 }

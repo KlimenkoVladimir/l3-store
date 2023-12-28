@@ -1,13 +1,3 @@
-// import { CollectionService } from './collection.service';
-
-// class FavService extends CollectionService {
-//   constructor() {
-//     super('__wb-fav');
-//   }
-// }
-
-// export const favService = new FavService();
-
 import localforage from 'localforage';
 import { ProductData } from 'types';
 

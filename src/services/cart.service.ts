@@ -1,24 +1,3 @@
-// import { CollectionService } from './collection.service';
-
-// class CartService extends CollectionService {
-//   constructor() {
-//     super('__wb-cart');
-//   }
-
-//   init() {
-//     this._updCounters();
-//   }
-
-//   private async _updCounters() {
-//     const products = await this.get();
-//     const count = products.length >= 10 ? '9+' : products.length;
-
-//     //@ts-ignore
-//     document.querySelectorAll('.js__cart-counter').forEach(($el: HTMLElement) => ($el.innerText = String(count || '')));
-//   }
-// }
-
-// export const cartService = new CartService();
 import localforage from 'localforage';
 import { ProductData } from 'types';
 
