@@ -49,10 +49,6 @@ class ProductDetail extends Component {
       .then((secretKey) => {
         this.view.secretKey.setAttribute('content', secretKey);
       });
-
-    // console.log(this.view.secretKey.content);
-
-    statService.sendViewCard(this.product, this.view.secretKey.content);
   }
 
   private _addToCart() {
