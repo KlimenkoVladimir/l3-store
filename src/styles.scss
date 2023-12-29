@@ -108,6 +108,7 @@ img {
 
   &:hover {
     background: var(--key-color-dark);
+    cursor: pointer;
   }
 
   &:disabled {
@@ -117,6 +118,10 @@ img {
 
   &.is__large {
     font-size: 1.25em;
+  }
+  &.is__inCart {
+    background: var(--plate-color);
+    color: #000;
   }
 }
 

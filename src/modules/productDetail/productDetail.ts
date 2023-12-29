@@ -9,6 +9,8 @@ import { favService } from '../../services/fav.service';
 class ProductDetail extends Component {
   more: ProductList;
   product?: ProductData;
+  isInCart?: any;
+  isInFav?: any;
 
   constructor(props: any) {
     super(props);
@@ -32,14 +34,14 @@ class ProductDetail extends Component {
     this.view.title.innerText = name;
     this.view.description.innerText = description;
     this.view.price.innerText = formatPrice(salePriceU);
-    this.view.btnBuy.onclick = this._addToCart.bind(this);
-    this.view.btnFav.onclick = this._addToFav.bind(this);
+    this.view.btnBuy.onclick = this._toggleCart.bind(this);
+    this.view.btnFav.onclick = this._toggleFav.bind(this);
 
-    const isInCart = await cartService.isInCart(this.product);
-    const isInFav = await favService.isInFav(this.product);
+    this.isInCart = await cartService.isInCart(this.product);
+    this.isInFav = await favService.isInFav(this.product);
 
-    if (isInCart) this._setInCart();
-    if (isInFav) this._setInFav();
+    if (this.isInCart) this._setInCart();
+    if (this.isInFav) this._setInFav();
 
     fetch(`/api/getProductSecretKey?id=${id}`)
       .then((res) => res.json())
@@ -54,30 +56,50 @@ class ProductDetail extends Component {
       });
   }
 
-  private _addToCart() {
+  private _toggleCart() {
     if (!this.product) return;
 
-    cartService.addProduct(this.product);
-    this._setInCart();
+    if (!this.isInCart) {
+      cartService.addProduct(this.product);
+      this.isInCart = true;
+      this._setInCart();
+    } else {
+      cartService.removeProduct(this.product);
+      this.isInCart = false;
+      this._setInCart();
+    }
   }
 
-  private _addToFav() {
+  private _toggleFav() {
     if (!this.product) return;
 
-    favService.addProduct(this.product);
-    this._setInFav();
+    if (!this.isInFav) {
+      favService.addProduct(this.product);
+      this.isInFav = true;
+      this._setInFav();
+    } else {
+      favService.removeProduct(this.product);
+      this.isInFav = false;
+      this._setInFav();
+    }
   }
 
   private _setInCart() {
-    this.view.btnBuy.innerText = '✓ В корзине';
-    this.view.btnBuy.disabled = true;
-    console.log('in cart');
+    if (!this.isInCart) {
+      this.view.btnBuy.innerText = 'В корзину';
+      this.view.btnBuy.classList.remove('is__inCart');
+    } else {
+      this.view.btnBuy.innerText = '✓ В корзине';
+      this.view.btnBuy.classList.add('is__inCart');
+    }
   }
 
   private _setInFav() {
-    this.view.btnFav.innerHTML = `<svg class="svg-icon"><use xlink:href="#heart-fill"></use></svg>`;
-
-    this.view.btnFav.disabled = true;
+    if (!this.isInFav) {
+      this.view.btnFav.innerHTML = `<svg class="svg-icon"><use xlink:href="#heart"></use></svg>`;
+    } else {
+      this.view.btnFav.innerHTML = `<svg class="svg-icon"><use xlink:href="#heart-fill"></use></svg>`;
+    }
   }
 }
 
