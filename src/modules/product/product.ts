@@ -32,19 +32,16 @@ export class Product {
     this.view.price.innerText = formatPrice(salePriceU);
     this.observer = new IntersectionObserver(this._callback.bind(this), { threshold: 0.5 });
     this.observer.observe(this.view.root);
-    console.log(this.params);
   }
 
-  private _callback(entries: any, observer: IntersectionObserver) {
-    entries.forEach((entry: any) => {
+  private _callback(entries: IntersectionObserverEntry[], observer: IntersectionObserver) {
+    entries.forEach((entry: IntersectionObserverEntry) => {
       if (entry.isIntersecting) {
         fetch(`/api/getProductSecretKey?id=${this.product.id}`)
           .then((res) => res.json())
           .then((secretKey) => {
             statService.sendViewCard(this.product, secretKey);
           });
-        console.log(this.product.log);
-
         observer.unobserve(entry.target);
       }
     });
