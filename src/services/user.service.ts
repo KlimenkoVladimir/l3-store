@@ -10,7 +10,7 @@ class UserService {
   }
 
   async getId(): Promise<string> {
-    let id = await localforage.getItem(ID_DB) as string;
+    let id = (await localforage.getItem(ID_DB)) as string;
 
     if (!id) id = await this._setId();
 
