@@ -4,7 +4,7 @@ import { formatPrice } from '../../utils/helpers';
 import { ProductData } from 'types';
 import html from './productDetail.tpl.html';
 import { cartService } from '../../services/cart.service';
-import { userService } from '../../services/user.service';
+import { getFetchOptions } from '../../utils/helpers';
 
 class ProductDetail extends Component {
   more: ProductList;
@@ -44,12 +44,8 @@ class ProductDetail extends Component {
         this.view.secretKey.setAttribute('content', secretKey);
       });
 
-    const userId = await userService.getId();
-    fetch('/api/getPopularProducts', {
-      headers: {
-        'x-userid': userId
-      }
-    })
+    const options = await getFetchOptions();
+    fetch('/api/getPopularProducts', options)
       .then((res) => res.json())
       .then((products) => {
         this.more.update(products);

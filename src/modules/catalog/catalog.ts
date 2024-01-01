@@ -2,7 +2,7 @@ import { Component } from '../component';
 import html from './catalog.tpl.html';
 
 import { ProductList } from '../productList/productList';
-import { userService } from '../../services/user.service';
+import { getFetchOptions } from '../../utils/helpers';
 
 class Catalog extends Component {
   productList: ProductList;
@@ -15,12 +15,8 @@ class Catalog extends Component {
   }
 
   async render() {
-    const userId = await userService.getId();
-    const productsResp = await fetch('/api/getProducts', {
-      headers: {
-        'x-userid': userId
-      }
-    });
+    const options = await getFetchOptions();
+    const productsResp = await fetch('/api/getProducts', options);
     const products = await productsResp.json();
     this.productList.update(products);
   }
