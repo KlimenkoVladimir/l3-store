@@ -4,30 +4,30 @@
 
   span {
     font-size: 22px;
-    font-weight: bold;
+    font-weight: 550;
   }
 }
 
 .hint {
   position: relative;
-  font-weight: bold;
+  font-weight: 550;
   height: 36px;
   padding: 4px 6px 8px 6px;
   background: linear-gradient(93deg, #da15b8 4.93%, #8d06cc 100%);
   -webkit-background-clip: text;
   color: transparent;
   text-decoration: none;
-}
 
-.hint::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-  color: transparent;
-  z-index: -1;
-  background-color: var(--smoky-color);
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    color: transparent;
+    z-index: -1;
+    background-color: var(--smoky-color);
+  }
 }

@@ -17,7 +17,6 @@ class Homepage extends Component {
     this.popularProducts.attach(this.view.popular);
     this.searchHints = new SearchHints();
     this.searchHints.attach(this.view.hints);
-    console.log(this);
   }
 
   render() {

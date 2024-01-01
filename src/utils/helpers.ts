@@ -31,13 +31,14 @@ export const formatPrice = (price: number) => {
 };
 
 export const fetchHints = function (): Promise<Hint[]> {
-  return new Promise(function (resolve) {
+  return new Promise<Hint[]>(function (resolve) {
     setTimeout(
       () =>
         resolve([
-          { text: 'чехол iphone 13 pro', href: '/iphone' },
-          { text: 'коляски agex', href: '/agex' },
-          { text: 'яндекс станция 2', href: '/yandex' }
+          { text: 'чехол iphone 13 pro', href: '/search/iphone' },
+          { text: 'коляски agex', href: '/search/agex' },
+          { text: 'яндекс станция 2', href: '/search/yandex' },
+          { text: 'четвертую подсказку не показываем', href: '/search/4' }
         ]),
       100
     );
