@@ -29,6 +29,7 @@ export class ProductList {
     this.products.forEach((product) => {
       const productComp = new Product(product);
       productComp.render();
+      productComp.observer.observe(productComp.view.root);
       productComp.attach(this.view.root);
     });
   }

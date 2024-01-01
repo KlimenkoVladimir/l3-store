@@ -31,7 +31,6 @@ export class Product {
     this.view.title.innerText = name;
     this.view.price.innerText = formatPrice(salePriceU);
     this.observer = new IntersectionObserver(this._callback.bind(this), { threshold: 0.5 });
-    this.observer.observe(this.view.root);
   }
 
   private _callback(entries: IntersectionObserverEntry[], observer: IntersectionObserver) {
