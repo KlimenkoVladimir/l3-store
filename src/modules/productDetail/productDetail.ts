@@ -38,16 +38,16 @@ class ProductDetail extends Component {
 
     if (isInCart) this._setInCart();
 
+    fetch(`/api/getProductSecretKey?id=${id}`)
+      .then((res) => res.json())
+      .then((secretKey) => {
+        this.view.secretKey.setAttribute('content', secretKey);
+      });
+
     fetch('/api/getPopularProducts')
       .then((res) => res.json())
       .then((products) => {
         this.more.update(products);
-      });
-
-    await fetch(`/api/getProductSecretKey?id=${id}`)
-      .then((res) => res.json())
-      .then((secretKey) => {
-        this.view.secretKey.setAttribute('content', secretKey);
       });
   }
 

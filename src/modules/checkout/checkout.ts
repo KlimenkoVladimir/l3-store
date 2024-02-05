@@ -11,7 +11,6 @@ class Checkout extends Component {
 
   async render() {
     this.products = await cartService.get();
-    console.log(this.products);
 
     if (this.products.length < 1) {
       this.view.root.classList.add('is__empty');
