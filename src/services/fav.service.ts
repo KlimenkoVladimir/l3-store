@@ -42,9 +42,9 @@ class FavService {
     const favElement = document.querySelector('.js__fav') as HTMLElement;
 
     if (!products.length) {
-      favElement.style.display = 'none';
+      favElement.classList.add('hide');
     } else {
-      favElement.style.display = 'inline';
+      favElement.classList.remove('hide');
     }
   }
 }

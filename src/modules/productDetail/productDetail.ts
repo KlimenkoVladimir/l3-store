@@ -9,8 +9,8 @@ import { favService } from '../../services/fav.service';
 class ProductDetail extends Component {
   more: ProductList;
   product?: ProductData;
-  isInCart?: any;
-  isInFav?: any;
+  isInCart?: boolean;
+  isInFav?: boolean;
 
   constructor(props: any) {
     super(props);
@@ -66,7 +66,7 @@ class ProductDetail extends Component {
     } else {
       cartService.removeProduct(this.product);
       this.isInCart = false;
-      this._setInCart();
+      this._setNotInCart();
     }
   }
 
@@ -80,26 +80,26 @@ class ProductDetail extends Component {
     } else {
       favService.removeProduct(this.product);
       this.isInFav = false;
-      this._setInFav();
+      this._setNotInFav();
     }
   }
 
   private _setInCart() {
-    if (!this.isInCart) {
-      this.view.btnBuy.innerText = 'В корзину';
-      this.view.btnBuy.classList.remove('is__inCart');
-    } else {
-      this.view.btnBuy.innerText = '✓ В корзине';
-      this.view.btnBuy.classList.add('is__inCart');
-    }
+    this.view.btnBuy.innerText = '✓ В корзине';
+    this.view.btnBuy.classList.add('is__inCart');
+  }
+
+  private _setNotInCart() {
+    this.view.btnBuy.innerText = 'В корзину';
+    this.view.btnBuy.classList.remove('is__inCart');
   }
 
   private _setInFav() {
-    if (!this.isInFav) {
-      this.view.btnFav.innerHTML = `<svg class="svg-icon"><use xlink:href="#heart"></use></svg>`;
-    } else {
-      this.view.btnFav.innerHTML = `<svg class="svg-icon"><use xlink:href="#heart-fill"></use></svg>`;
-    }
+    this.view.btnFav.innerHTML = `<svg class="svg-icon"><use xlink:href="#heart-fill"></use></svg>`;
+  }
+
+  private _setNotInFav() {
+    this.view.btnFav.innerHTML = `<svg class="svg-icon"><use xlink:href="#heart"></use></svg>`;
   }
 }
 

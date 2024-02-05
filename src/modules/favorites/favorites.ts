@@ -13,9 +13,9 @@ class Favorites extends Component {
     this.products.forEach((product) => {
       const productComp = new Product(product, { isHorizontal: false });
       productComp.render();
-      productComp.attach(this.view.fav);
+      productComp.attach(this.view.favorites);
     });
   }
 }
 
-export const favComp = new Favorites(html);
+export const favoritesComp = new Favorites(html);
