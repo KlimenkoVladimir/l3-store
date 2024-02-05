@@ -1,5 +1,4 @@
 .hints {
-  font-size: 22px;
   padding: 0px 14px;
 
   span {
@@ -10,12 +9,16 @@
 
 .hint {
   position: relative;
+  font-size: 22px;
+  font-style: normal;
   font-weight: 550;
+  line-height: 24px;
   height: 36px;
   padding: 4px 6px 8px 6px;
   background: linear-gradient(93deg, #da15b8 4.93%, #8d06cc 100%);
+  background-clip: text;
   -webkit-background-clip: text;
-  color: transparent;
+  -webkit-text-fill-color: transparent;
   text-decoration: none;
 
   &::before {
